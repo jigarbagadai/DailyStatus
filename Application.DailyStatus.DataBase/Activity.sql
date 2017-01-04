@@ -6,5 +6,5 @@
     [CreatedBy] INT NOT NULL, 
     [CreatedDate] DATETIME NOT NULL DEFAULT GETUTCDATE(), 
     [ModifiedBy] INT NOT NULL, 
-    [ModifiedDate] DATETIME NOT NULL DEFAULT GETUTCDATE()
+    [ModifiedDate] DATETIME NOT NULL DEFAULT GETUTCDATE()  
 )
