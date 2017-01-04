@@ -68,7 +68,4 @@
     <Build Include="DailyWorkStatus.sql" />
     <Build Include="AuditDetails.sql" />
   </ItemGroup>
-  <ItemGroup>
-    <RefactorLog Include="Application.DailyStatus.DataBase.refactorlog" />
-  </ItemGroup>
 </Project>
