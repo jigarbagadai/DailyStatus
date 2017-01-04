@@ -1,0 +1,10 @@
+﻿CREATE TABLE [dbo].[Activity]
+(
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
+    [Name] NVARCHAR(100) NOT NULL, 
+    [IsActive] BIT NOT NULL DEFAULT 1, 
+    [CreatedBy] INT NOT NULL, 
+    [CreatedDate] DATETIME NOT NULL DEFAULT GETUTCDATE(), 
+    [ModifiedBy] INT NOT NULL, 
+    [ModifiedDate] DATETIME NOT NULL DEFAULT GETUTCDATE()
+)
