@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.DailyStatus.BusinessService
+namespace Application.DailyStatus.BusinessCommon
 {
     public static class MapperConfiguration
     {

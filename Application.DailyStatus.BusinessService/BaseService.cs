@@ -11,9 +11,9 @@ namespace Application.DailyStatus.BusinessService
     {
         protected readonly UnitOfWork unitOfWork;
 
-        public BaseService()
+        public BaseService(UnitOfWork unitOfWork)
         {
-            unitOfWork = new UnitOfWork();
+            this.unitOfWork = unitOfWork;
         }
     }
 }

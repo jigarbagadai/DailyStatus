@@ -1,6 +1,5 @@
 ﻿using Application.DailyStatus.BusinessEntities;
 using Application.DailyStatus.BusinessInterface;
-using Application.DailyStatus.BusinessService;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,9 +13,9 @@ namespace Application.DailyStatus.WebApi.Controllers
     {
         private readonly IUserServices userService;
 
-        public UserController()
+        public UserController(IUserServices userService)
         {
-            userService = new UserServices();
+            this.userService = userService;
         }
 
         public HttpResponseMessage Get(int id)

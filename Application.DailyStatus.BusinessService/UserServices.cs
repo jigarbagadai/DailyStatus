@@ -7,11 +7,17 @@ using System.Threading.Tasks;
 using Application.DailyStatus.BusinessEntities;
 using Application.DailyStatus.DataModel;
 using AutoMapper;
+using Application.DailyStatus.Repository;
 
 namespace Application.DailyStatus.BusinessService
 {
     public class UserServices : BaseService, IUserServices
     {
+        public UserServices(UnitOfWork unitOfWork) : base(unitOfWork)
+        {
+
+        }
+
         public UserEntity GetUserById(int userId)
         {
             User user = this.unitOfWork.UserRepository.GetByID(userId);
