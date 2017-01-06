@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Application.DailyStatus.BusinessService;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -13,10 +14,9 @@ namespace Application.DailyStatus.WebApi
     {
         protected void Application_Start()
         {
-            AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
-            RouteConfig.RegisterRoutes(RouteTable.Routes);
+            MapperConfiguration.IntlializeMapperConfiguration();
         }
     }
 }

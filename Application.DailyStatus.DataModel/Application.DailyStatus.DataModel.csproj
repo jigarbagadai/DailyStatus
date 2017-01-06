@@ -30,8 +30,19 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -40,7 +51,77 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Activity.cs">
+      <DependentUpon>DailyStatuDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AuditDetail.cs">
+      <DependentUpon>DailyStatuDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DailyStatuDataModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DailyStatuDataModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DailyStatuDataModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DailyStatuDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DailyStatuDataModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DailyStatuDataModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="DailyWorkStatu.cs">
+      <DependentUpon>DailyStatuDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Role.cs">
+      <DependentUpon>DailyStatuDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RoleActivity.cs">
+      <DependentUpon>DailyStatuDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sysdiagram.cs">
+      <DependentUpon>DailyStatuDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TimeZone.cs">
+      <DependentUpon>DailyStatuDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="User.cs">
+      <DependentUpon>DailyStatuDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserDateWiseStatu.cs">
+      <DependentUpon>DailyStatuDataModel.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="DailyStatuDataModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DailyStatuDataModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <None Include="DailyStatuDataModel.edmx.diagram">
+      <DependentUpon>DailyStatuDataModel.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DailyStatuDataModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DailyStatuDataModel.edmx</DependentUpon>
+      <LastGenOutput>DailyStatuDataModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="DailyStatuDataModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DailyStatuDataModel.edmx</DependentUpon>
+      <LastGenOutput>DailyStatuDataModel.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

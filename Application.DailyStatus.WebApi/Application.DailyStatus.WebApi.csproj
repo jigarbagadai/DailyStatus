@@ -44,6 +44,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
@@ -125,9 +133,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
-    <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -143,9 +151,24 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <Content Include="packages.config" />
+    <ProjectReference Include="..\Application.DailyStatus.BusinessEntities\Application.DailyStatus.BusinessEntities.csproj">
+      <Project>{499c88f4-8fc7-4300-8972-9b51c3ceffdb}</Project>
+      <Name>Application.DailyStatus.BusinessEntities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Application.DailyStatus.BusinessInterface\Application.DailyStatus.BusinessInterface.csproj">
+      <Project>{3fe425ee-e27f-4206-b1f8-854394b2f17c}</Project>
+      <Name>Application.DailyStatus.BusinessInterface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Application.DailyStatus.BusinessService\Application.DailyStatus.BusinessService.csproj">
+      <Project>{9523CD01-6FBA-4524-A1E5-B090AFF18857}</Project>
+      <Name>Application.DailyStatus.BusinessService</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <PropertyGroup>
