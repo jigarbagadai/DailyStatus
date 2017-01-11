@@ -185,6 +185,10 @@
       <Project>{3fe425ee-e27f-4206-b1f8-854394b2f17c}</Project>
       <Name>Application.DailyStatus.BusinessInterface</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Application.DailyStatus.Resolver\Application.DailyStatus.Resolver.csproj">
+      <Project>{9e0912e7-5398-466a-b54b-f0e5fb5c8b58}</Project>
+      <Name>Application.DailyStatus.Resolver</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

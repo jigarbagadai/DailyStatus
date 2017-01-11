@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Application.DailyStatus.DataModel
+namespace Application.DailyStatus.DataAccessEntities
 {
     using System;
     using System.Collections.Generic;

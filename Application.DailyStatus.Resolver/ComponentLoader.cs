@@ -8,7 +8,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.DailyStatus.BusinessCommon
+namespace Application.DailyStatus.Resolver
 {
     public static class ComponentLoader
     {

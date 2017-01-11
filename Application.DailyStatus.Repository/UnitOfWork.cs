@@ -1,4 +1,5 @@
-﻿using Application.DailyStatus.DataModel;
+﻿using Application.DailyStatus.DataAccessEntities;
+using Application.DailyStatus.DataAccessInterface;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Validation;
@@ -6,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.DailyStatus.Repository
+namespace Application.DailyStatus.DataAccess
 {
-    public class UnitOfWork : IDisposable
+    public class UnitOfWork : IDisposable, IUnitOfWork
     {
         private DatabaseConnection context = null;
         private GenericRepository<User> userRepository;

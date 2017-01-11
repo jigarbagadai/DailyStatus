@@ -1,4 +1,4 @@
-﻿using Application.DailyStatus.DataModel;
+﻿using Application.DailyStatus.DataAccessEntities;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.DailyStatus.Repository
+namespace Application.DailyStatus.DataAccess
 {
     public class GenericRepository<TEntity> where TEntity : class
     {

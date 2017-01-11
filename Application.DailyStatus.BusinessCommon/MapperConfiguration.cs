@@ -1,5 +1,5 @@
 ﻿using Application.DailyStatus.BusinessEntities;
-using Application.DailyStatus.DataModel;
+using Application.DailyStatus.DataAccessEntities;
 using AutoMapper;
 using System;
 using System.Collections.Generic;

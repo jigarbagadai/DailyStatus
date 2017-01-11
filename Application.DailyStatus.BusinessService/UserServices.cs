@@ -5,9 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Application.DailyStatus.BusinessEntities;
-using Application.DailyStatus.DataModel;
+using Application.DailyStatus.DataAccessEntities;
 using AutoMapper;
-using Application.DailyStatus.Repository;
+using Application.DailyStatus.DataAccessInterface;
+using Application.DailyStatus.DataAccess;
 
 namespace Application.DailyStatus.BusinessService
 {

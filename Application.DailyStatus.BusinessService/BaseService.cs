@@ -1,4 +1,5 @@
-﻿using Application.DailyStatus.Repository;
+﻿using Application.DailyStatus.DataAccess;
+using Application.DailyStatus.DataAccessInterface;
 using System;
 using System.Collections.Generic;
 using System.Linq;

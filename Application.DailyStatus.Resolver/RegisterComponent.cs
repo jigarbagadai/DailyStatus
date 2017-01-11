@@ -5,15 +5,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.DailyStatus.BusinessCommon
+namespace Application.DailyStatus.Resolver
 {
     internal class RegisterComponent : IRegisterComponent
     {
-        private readonly IUnityContainer _container;
+        private readonly IUnityContainer container;
 
         public RegisterComponent(IUnityContainer container)
         {
-            this._container = container;
+            this.container = container;
         }
 
         public void RegisterType<TFrom, TTo>(bool withInterception = false) where TTo : TFrom
@@ -24,13 +24,13 @@ namespace Application.DailyStatus.BusinessCommon
             }
             else
             {
-                this._container.RegisterType<TFrom, TTo>();
+                this.container.RegisterType<TFrom, TTo>();
             }
         }
 
         public void RegisterTypeWithControlledLifeTime<TFrom, TTo>(bool withInterception = false) where TTo : TFrom
         {
-            this._container.RegisterType<TFrom, TTo>(new ContainerControlledLifetimeManager());
+            this.container.RegisterType<TFrom, TTo>(new ContainerControlledLifetimeManager());
         }
     }
 }

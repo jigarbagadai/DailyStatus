@@ -1,6 +1,7 @@
 ﻿using Application.DailyStatus.BusinessInterface;
 using Application.DailyStatus.BusinessService;
-using Application.DailyStatus.Repository;
+using Application.DailyStatus.DataAccess;
+using Application.DailyStatus.Resolver;
 using Microsoft.Practices.Unity;
 using System;
 using System.Collections.Generic;
@@ -15,9 +16,14 @@ namespace Application.DailyStatus.BusinessCommon
         public static IUnityContainer BuildUnityContainer()
         {
             var container = new UnityContainer();
-            container.RegisterType<IUserServices, UserServices>().RegisterType<UnitOfWork>(new HierarchicalLifetimeManager());
-
+            RegisterTypes(container);
             return container;
+        }
+
+        public static void RegisterTypes(IUnityContainer container)
+        {
+            //Component initialization via MEF
+            ComponentLoader.LoadContainer(container, ".\\bin", "Application.DailyStatus.*.dll");
         }
     }
 }

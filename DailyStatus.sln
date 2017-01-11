@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.DailyStatus.DataModel", "Application.DailyStatus.DataModel\Application.DailyStatus.DataModel.csproj", "{4E6CD3F6-32AE-4EE9-8EFD-94FD29EA3188}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.DailyStatus.DataAccessEntities", "Application.DailyStatus.DataModel\Application.DailyStatus.DataAccessEntities.csproj", "{4E6CD3F6-32AE-4EE9-8EFD-94FD29EA3188}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.DailyStatus.BusinessEntities", "Application.DailyStatus.BusinessEntities\Application.DailyStatus.BusinessEntities.csproj", "{499C88F4-8FC7-4300-8972-9B51C3CEFFDB}"
 EndProject
@@ -19,9 +19,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.DailyStatus.Bus
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.DailyStatus.BusinessInterface", "Application.DailyStatus.BusinessInterface\Application.DailyStatus.BusinessInterface.csproj", "{3FE425EE-E27F-4206-B1F8-854394B2F17C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.DailyStatus.Repository", "Application.DailyStatus.Repository\Application.DailyStatus.Repository.csproj", "{019694B7-C70B-40B8-A43C-570A35D7A7F2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.DailyStatus.DataAccess", "Application.DailyStatus.Repository\Application.DailyStatus.DataAccess.csproj", "{019694B7-C70B-40B8-A43C-570A35D7A7F2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.DailyStatus.BusinessCommon", "Application.DailyStatus.BusinessCommon\Application.DailyStatus.BusinessCommon.csproj", "{E5DAA549-95F5-48AA-8713-3A36A8A6C79B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.DailyStatus.Resolver", "Application.DailyStatus.Resolver\Application.DailyStatus.Resolver.csproj", "{9E0912E7-5398-466A-B54B-F0E5FB5C8B58}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.DailyStatus.DataAccessCommon", "Application.DailyStatus.RepositoryCommon\Application.DailyStatus.DataAccessCommon.csproj", "{13A973C2-331D-46FC-882B-9817B48D0FC1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.DailyStatus.DataAccessInterface", "Application.DailyStatus.DataAccessInterface\Application.DailyStatus.DataAccessInterface.csproj", "{6B824E84-B756-43A9-B7FF-731EA0BABB82}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +69,18 @@ Global
 		{E5DAA549-95F5-48AA-8713-3A36A8A6C79B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E5DAA549-95F5-48AA-8713-3A36A8A6C79B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E5DAA549-95F5-48AA-8713-3A36A8A6C79B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E0912E7-5398-466A-B54B-F0E5FB5C8B58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E0912E7-5398-466A-B54B-F0E5FB5C8B58}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E0912E7-5398-466A-B54B-F0E5FB5C8B58}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E0912E7-5398-466A-B54B-F0E5FB5C8B58}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13A973C2-331D-46FC-882B-9817B48D0FC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13A973C2-331D-46FC-882B-9817B48D0FC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13A973C2-331D-46FC-882B-9817B48D0FC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13A973C2-331D-46FC-882B-9817B48D0FC1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B824E84-B756-43A9-B7FF-731EA0BABB82}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B824E84-B756-43A9-B7FF-731EA0BABB82}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B824E84-B756-43A9-B7FF-731EA0BABB82}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B824E84-B756-43A9-B7FF-731EA0BABB82}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -76,5 +94,8 @@ Global
 		{3FE425EE-E27F-4206-B1F8-854394B2F17C} = {62C2AA52-2C59-4638-A6CF-5B128596D64E}
 		{019694B7-C70B-40B8-A43C-570A35D7A7F2} = {62C2AA52-2C59-4638-A6CF-5B128596D64E}
 		{E5DAA549-95F5-48AA-8713-3A36A8A6C79B} = {62C2AA52-2C59-4638-A6CF-5B128596D64E}
+		{9E0912E7-5398-466A-B54B-F0E5FB5C8B58} = {62C2AA52-2C59-4638-A6CF-5B128596D64E}
+		{13A973C2-331D-46FC-882B-9817B48D0FC1} = {62C2AA52-2C59-4638-A6CF-5B128596D64E}
+		{6B824E84-B756-43A9-B7FF-731EA0BABB82} = {62C2AA52-2C59-4638-A6CF-5B128596D64E}
 	EndGlobalSection
 EndGlobal

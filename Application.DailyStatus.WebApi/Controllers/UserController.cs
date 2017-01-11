@@ -9,6 +9,7 @@ using System.Web.Http;
 
 namespace Application.DailyStatus.WebApi.Controllers
 {
+    [RoutePrefix("api/v1")]
     public class UserController : BaseController
     {
         private readonly IUserServices userService;
@@ -18,6 +19,7 @@ namespace Application.DailyStatus.WebApi.Controllers
             this.userService = userService;
         }
 
+        [Route("User/{id:int?}")]
         public HttpResponseMessage Get(int id)
         {
             UserEntity user = this.userService.GetUserById(id);
