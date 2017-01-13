@@ -1,5 +1,6 @@
 ﻿using Application.DailyStatus.BusinessEntities;
 using Application.DailyStatus.BusinessInterface;
+using Application.DailyStatus.WebApi.Authorization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,7 @@ namespace Application.DailyStatus.WebApi.Controllers
             this.userService = userService;
         }
 
+        [DailyStatusAuthorize(Roles = "admin")]
         [Route("User/{id:int?}")]
         public HttpResponseMessage Get(int id)
         {
