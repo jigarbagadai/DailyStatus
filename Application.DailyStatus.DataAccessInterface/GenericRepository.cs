@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.DailyStatus.DataAccess
+namespace Application.DailyStatus.DataAccessInterface
 {
     public class GenericRepository<TEntity> where TEntity : class
     {

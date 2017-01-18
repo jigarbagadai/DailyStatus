@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Application.DailyStatus.DataAccessEntities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,8 @@ namespace Application.DailyStatus.DataAccessInterface
 {
     public interface IUnitOfWork
     {
+        GenericRepository<User> UserRepository { get; }
+
         void Save();
     }
 }

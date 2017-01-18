@@ -1,5 +1,4 @@
-﻿using Application.DailyStatus.BusinessInterface;
-using Application.DailyStatus.BusinessService;
+﻿using Application.DailyStatus.Logging;
 using Application.DailyStatus.Resolver;
 using System;
 using System.Collections.Generic;
@@ -15,8 +14,7 @@ namespace Application.DailyStatus.BusinessCommon
     {
         public void SetUp(IRegisterComponent registerComponent)
         {
-            registerComponent.RegisterType<IUserServices, UserServices>();
-            registerComponent.RegisterType<DataAccessInterface.IUnitOfWork, DataAccess.UnitOfWork>();
+            registerComponent.RegisterType<ILogger, NLogger>();
         }
     }
 }

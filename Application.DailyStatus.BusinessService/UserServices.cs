@@ -14,7 +14,7 @@ namespace Application.DailyStatus.BusinessService
 {
     public class UserServices : BaseService, IUserServices
     {
-        public UserServices(UnitOfWork unitOfWork) : base(unitOfWork)
+        public UserServices(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
 
         }

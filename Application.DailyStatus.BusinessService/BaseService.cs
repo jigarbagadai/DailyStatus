@@ -10,9 +10,9 @@ namespace Application.DailyStatus.BusinessService
 {
     public class BaseService
     {
-        protected readonly UnitOfWork unitOfWork;
+        protected readonly IUnitOfWork unitOfWork;
 
-        public BaseService(UnitOfWork unitOfWork)
+        public BaseService(IUnitOfWork unitOfWork)
         {
             this.unitOfWork = unitOfWork;
         }

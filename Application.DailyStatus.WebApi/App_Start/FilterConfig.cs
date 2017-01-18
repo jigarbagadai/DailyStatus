@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using Application.DailyStatus.WebApi.Filters;
+using System.Web;
 using System.Web.Mvc;
 
 namespace Application.DailyStatus.WebApi
@@ -7,7 +8,6 @@ namespace Application.DailyStatus.WebApi
     {
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
-            filters.Add(new HandleErrorAttribute());
         }
     }
 }

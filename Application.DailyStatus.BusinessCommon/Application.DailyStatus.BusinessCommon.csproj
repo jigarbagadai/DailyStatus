@@ -79,6 +79,10 @@
       <Project>{9523cd01-6fba-4524-a1e5-b090aff18857}</Project>
       <Name>Application.DailyStatus.BusinessService</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Application.DailyStatus.DataAccessInterface\Application.DailyStatus.DataAccessInterface.csproj">
+      <Project>{6b824e84-b756-43a9-b7ff-731ea0babb82}</Project>
+      <Name>Application.DailyStatus.DataAccessInterface</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Application.DailyStatus.DataModel\Application.DailyStatus.DataAccessEntities.csproj">
       <Project>{4e6cd3f6-32ae-4ee9-8efd-94fd29ea3188}</Project>
       <Name>Application.DailyStatus.DataAccessEntities</Name>
