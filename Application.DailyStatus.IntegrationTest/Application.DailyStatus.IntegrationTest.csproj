@@ -76,6 +76,10 @@
       <Project>{c1fcc183-f2b5-4364-8a5c-ebe1262608d2}</Project>
       <Name>Application.DailyStatus.MockData</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Application.DailyStatus.WebApi\Application.DailyStatus.WebApi.csproj">
+      <Project>{7ca44b29-62d7-46f4-960b-4fd198bf8280}</Project>
+      <Name>Application.DailyStatus.WebApi</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

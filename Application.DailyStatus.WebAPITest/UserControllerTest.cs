@@ -17,6 +17,7 @@ using Newtonsoft.Json;
 using Application.DailyStatus.BusinessEntities;
 using System.Net;
 using Application.DailyStatus.BusinessCommon;
+using Application.DailyStatus.WebApi.Common;
 
 namespace Application.DailyStatus.WebAPITest
 {
@@ -32,7 +33,7 @@ namespace Application.DailyStatus.WebAPITest
         private GenericRepository<User> userRepository;
         private DatabaseConnection dbEntities;
         private HttpClient client;
-        private HttpResponseMessage response;
+        private DailyStatusActionResult response;
         private string serviceBaseURL = ConfigurationManager.AppSettings["BaseUrl"];
 
         [TestInitialize]
@@ -61,7 +62,7 @@ namespace Application.DailyStatus.WebAPITest
         {
             User user = this.unitOfWork.UserRepository.GetByID(1);
             UserController userController = new UserController(userService);
-            userController.Request= new HttpRequestMessage
+            userController.Request = new HttpRequestMessage
             {
                 Method = HttpMethod.Get,
                 RequestUri = new Uri(serviceBaseURL + "api/v1/1")
@@ -69,10 +70,8 @@ namespace Application.DailyStatus.WebAPITest
 
             userController.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
             response = userController.Get(1);
-
-            var responseResult = JsonConvert.DeserializeObject<UserEntity>(response.Content.ReadAsStringAsync().Result);
-            Assert.AreEqual(response.StatusCode, HttpStatusCode.OK);
-            Assert.IsNotNull(responseResult.UserName , user.Name);
+            Assert.AreEqual(response.Result.ResponseStatus,ResponseStatus.Sucess);
+            Assert.IsNotNull(response.Result.ResponseData);
         }
     }
 }

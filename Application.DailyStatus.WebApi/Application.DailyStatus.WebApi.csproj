@@ -188,6 +188,10 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Authorization\DailyStatusAuthorize.cs" />
+    <Compile Include="Common\ApiResult.cs" />
+    <Compile Include="Common\DailyStatusActionResult.cs" />
+    <Compile Include="Common\Entensions.cs" />
+    <Compile Include="Common\ResponseStatus.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Authorization\DailyStatusAuthorizationServerProvider.cs" />

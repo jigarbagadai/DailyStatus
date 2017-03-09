@@ -1,6 +1,7 @@
 ﻿using Application.DailyStatus.BusinessEntities;
 using Application.DailyStatus.BusinessInterface;
 using Application.DailyStatus.WebApi.Authorization;
+using Application.DailyStatus.WebApi.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,17 +23,10 @@ namespace Application.DailyStatus.WebApi.Controllers
 
         [DailyStatusAuthorize(Roles = "admin")]
         [Route("User/{id:int?}")]
-        public HttpResponseMessage Get(int id)
+        public DailyStatusActionResult Get(int id)
         {
             UserEntity user = this.userService.GetUserById(id);
-            if (user != null)
-            {
-                return Request.CreateResponse(HttpStatusCode.OK, user);
-            }
-            else
-            {
-                return Request.CreateResponse(HttpStatusCode.NotFound, "User Not Exist");
-            }
+            return user.ToApiResult();
         }
     }
 }

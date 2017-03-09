@@ -9,6 +9,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Application.DailyStatus.BusinessEntities;
 using System.Net;
+using Application.DailyStatus.WebApi.Common;
 
 namespace Application.DailyStatus.IntegrationTest
 {
@@ -39,8 +40,11 @@ namespace Application.DailyStatus.IntegrationTest
             var client = new HttpClient { BaseAddress = new Uri(serviceBaseURL) };
             client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
             response = client.GetAsync("api/v1/User/1").Result;
-            var responseResult = JsonConvert.DeserializeObject<UserEntity>(response.Content.ReadAsStringAsync().Result);
+            var responseResult = JsonConvert.DeserializeObject<ApiResult>(response.Content.ReadAsStringAsync().Result);
             Assert.AreEqual(response.StatusCode, HttpStatusCode.OK);
+            Assert.IsNotNull(responseResult.ResponseData);
+            Assert.IsNull(responseResult.ErrorMessages);
+            Assert.AreEqual(responseResult.ResponseStatus,ResponseStatus.Sucess);
         }
 
         private string getUserToken()

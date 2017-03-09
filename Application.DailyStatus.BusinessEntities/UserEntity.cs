@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Application.DailyStatus.BusinessEntities
 {
-    public class UserEntity
+    public class UserEntity: BaseEntity
     {
         public int UserId { get; set; }
         public string UserName { get; set; }
