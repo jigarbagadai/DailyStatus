@@ -30,9 +30,9 @@ namespace Application.DailyStatus.BusinessCommon
                       .ForMember(des => des.TimeZone, opt => opt.MapFrom(src => src.TimeZone.Name));
         }
 
-        private static IMappingExpression<Role, RoleListEntity> GetRoleListMappingConfiguration(IMapperConfigurationExpression cfg)
+        private static IMappingExpression<GetAllRoles_Result, RoleListEntity> GetRoleListMappingConfiguration(IMapperConfigurationExpression cfg)
         {
-            return cfg.CreateMap<Role, RoleListEntity>()
+            return cfg.CreateMap<GetAllRoles_Result, RoleListEntity>()
                       .ForMember(des => des.RoleId, opt => opt.MapFrom(src => src.Id))
                       .ForMember(des => des.RoleName, opt => opt.MapFrom(src => src.Name));
         }

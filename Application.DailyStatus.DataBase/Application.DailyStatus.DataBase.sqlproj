@@ -67,5 +67,6 @@
     <Build Include="UserDateWiseStatus.sql" />
     <Build Include="DailyWorkStatus.sql" />
     <Build Include="AuditDetails.sql" />
+    <Build Include="GetAllRoles.sql" />
   </ItemGroup>
 </Project>

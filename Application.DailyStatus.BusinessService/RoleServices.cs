@@ -11,7 +11,7 @@ using Application.DailyStatus.DataAccessInterface;
 
 namespace Application.DailyStatus.BusinessService
 {
-    public class RoleServices:BaseService, IRoleServices
+    public class RoleServices : BaseService, IRoleServices
     {
         public RoleServices(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
@@ -25,9 +25,9 @@ namespace Application.DailyStatus.BusinessService
 
         public List<RoleListEntity> GetAllRole(string roleName, bool status, int skipRecords, int pageSize, string sortDirection, string sortColumn)
         {
-           List<GetAllRoles_Result> roles = this.unitOfWork.DailyStatusRepository.GetAllRoles(skipRecords,pageSize,sortColumn,sortDirection,roleName).ToList();
-           List<RoleListEntity> roleList = new List<RoleListEntity>();
-            //roleList = Mapper.Map<User, UserEntity>(roleList);
+            List<GetAllRoles_Result> roles = this.unitOfWork.DailyStatusRepository.GetAllRoles(skipRecords, pageSize, sortColumn, sortDirection, roleName).ToList();
+            List<RoleListEntity> roleList = new List<RoleListEntity>();
+            roleList = Mapper.Map<List<GetAllRoles_Result>, List<RoleListEntity>>(roles);
             return roleList;
         }
 
@@ -46,7 +46,23 @@ namespace Application.DailyStatus.BusinessService
 
         public bool IsRoleNameExists(int roleId, string roleName)
         {
-            throw new NotImplementedException();
+            Role role = this.unitOfWork.RoleRepository.GetFirst(m => m.Name == roleName);
+            if (role != null && role.Id == roleId)
+            {
+                return false;
+            }
+            else if (role != null && role.Id != roleId)
+            {
+                return true;
+            }
+            else if (role != null && role.Id == 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public bool SaveRole(RoleEntity role)
