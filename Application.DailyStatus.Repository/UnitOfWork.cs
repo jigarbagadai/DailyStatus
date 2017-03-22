@@ -13,6 +13,9 @@ namespace Application.DailyStatus.DataAccess
     {
         private DatabaseConnection context = null;
         private GenericRepository<User> userRepository;
+        private GenericRepository<Role> roleRepository;
+        private DailyStatusRepository dailyStatusRepository;
+
         private bool disposed = false;
 
         public UnitOfWork()
@@ -27,6 +30,26 @@ namespace Application.DailyStatus.DataAccess
                 if (this.userRepository == null)
                     this.userRepository = new GenericRepository<User>(context);
                 return userRepository;
+            }
+        }
+
+        public GenericRepository<Role> RoleRepository
+        {
+            get
+            {
+                if (this.roleRepository == null)
+                    this.roleRepository = new GenericRepository<Role>(context);
+                return roleRepository;
+            }
+        }
+
+        public DailyStatusRepository DailyStatusRepository
+        {
+            get
+            {
+                if (this.dailyStatusRepository == null)
+                    this.dailyStatusRepository = new DailyStatusRepository(context);
+                return dailyStatusRepository;
             }
         }
 

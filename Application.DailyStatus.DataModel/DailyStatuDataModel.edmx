@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DailyStatusModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DailyStatusModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Activity">
           <Key>
             <PropertyRef Name="Id" />
@@ -49,7 +49,7 @@
           <Property Name="IsActive" Type="bit" Nullable="false" />
           <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
-          <Property Name="ModifiedBy" Type="int" Nullable="false" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="RoleActivity">
@@ -183,6 +183,13 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="GetAllRoles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="StartRecord" Type="int" Mode="In" />
+          <Parameter Name="PageSize" Type="int" Mode="In" />
+          <Parameter Name="SortColumn" Type="nvarchar" Mode="In" />
+          <Parameter Name="SortOrder" Type="nvarchar" Mode="In" />
+          <Parameter Name="SearchText" Type="nvarchar" Mode="In" />
+        </Function>
         <EntityContainer Name="DailyStatusModelStoreContainer">
           <EntitySet Name="Activity" EntityType="Self.Activity" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AuditDetails" EntityType="Self.AuditDetails" Schema="dbo" store:Type="Tables" />
@@ -218,8 +225,7 @@
             <End Role="UserDateWiseStatus" EntitySet="UserDateWiseStatus" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DailyStatusModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -260,20 +266,6 @@
           <Property Name="Comments" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="UserDateWiseStatu" Relationship="Self.FK_DailyWorkStatus_UserDateWise" FromRole="DailyWorkStatus" ToRole="UserDateWiseStatus" />
         </EntityType>
-        <EntityType Name="Role">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="IsActive" Type="Boolean" Nullable="false" />
-          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
-          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="RoleActivities" Relationship="Self.FK_RoleActivity_Role" FromRole="Role" ToRole="RoleActivity" />
-          <NavigationProperty Name="Users" Relationship="Self.FK_User_Role" FromRole="Role" ToRole="User" />
-        </EntityType>
         <EntityType Name="RoleActivity">
           <Key>
             <PropertyRef Name="Id" />
@@ -287,7 +279,7 @@
           <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Activity" Relationship="Self.FK_RoleActivity_Activity" FromRole="RoleActivity" ToRole="Activity" />
-          <NavigationProperty Name="Role" Relationship="Self.FK_RoleActivity_Role" FromRole="RoleActivity" ToRole="Role" />
+          <NavigationProperty Name="Role" Relationship="DailyStatusModel.FK_RoleActivity_Role" FromRole="RoleActivity" ToRole="Role" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -325,9 +317,9 @@
           <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="UserRoleId" Type="Int32" Nullable="false" />
           <Property Name="TimeZoneId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Role" Relationship="Self.FK_User_Role" FromRole="User" ToRole="Role" />
           <NavigationProperty Name="TimeZone" Relationship="Self.FK_User_TimeZone" FromRole="User" ToRole="TimeZone" />
           <NavigationProperty Name="UserDateWiseStatus" Relationship="Self.FK_UserDateWiseStatus_User" FromRole="User" ToRole="UserDateWiseStatus" />
+          <NavigationProperty Name="Role" Relationship="DailyStatusModel.FK_User_Role" FromRole="User" ToRole="Role" />
         </EntityType>
         <EntityType Name="UserDateWiseStatu">
           <Key>
@@ -365,30 +357,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_RoleActivity_Role">
-          <End Role="Role" Type="Self.Role" Multiplicity="1" />
-          <End Role="RoleActivity" Type="Self.RoleActivity" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Role">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="RoleActivity">
-              <PropertyRef Name="RoleId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_User_Role">
-          <End Role="Role" Type="Self.Role" Multiplicity="1" />
-          <End Role="User" Type="Self.User" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Role">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="User">
-              <PropertyRef Name="UserRoleId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_User_TimeZone">
           <End Role="TimeZone" Type="Self.TimeZone" Multiplicity="1" />
           <End Role="User" Type="Self.User" Multiplicity="*" />
@@ -417,7 +385,6 @@
           <EntitySet Name="Activities" EntityType="Self.Activity" />
           <EntitySet Name="AuditDetails" EntityType="Self.AuditDetail" />
           <EntitySet Name="DailyWorkStatus" EntityType="Self.DailyWorkStatu" />
-          <EntitySet Name="Roles" EntityType="Self.Role" />
           <EntitySet Name="RoleActivities" EntityType="Self.RoleActivity" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="TimeZones" EntityType="Self.TimeZone" />
@@ -431,14 +398,6 @@
             <End Role="UserDateWiseStatus" EntitySet="UserDateWiseStatus" />
             <End Role="DailyWorkStatus" EntitySet="DailyWorkStatus" />
           </AssociationSet>
-          <AssociationSet Name="FK_RoleActivity_Role" Association="Self.FK_RoleActivity_Role">
-            <End Role="Role" EntitySet="Roles" />
-            <End Role="RoleActivity" EntitySet="RoleActivities" />
-          </AssociationSet>
-          <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
-            <End Role="Role" EntitySet="Roles" />
-            <End Role="User" EntitySet="Users" />
-          </AssociationSet>
           <AssociationSet Name="FK_User_TimeZone" Association="Self.FK_User_TimeZone">
             <End Role="TimeZone" EntitySet="TimeZones" />
             <End Role="User" EntitySet="Users" />
@@ -447,7 +406,69 @@
             <End Role="User" EntitySet="Users" />
             <End Role="UserDateWiseStatus" EntitySet="UserDateWiseStatus" />
           </AssociationSet>
+          <EntitySet Name="Roles" EntityType="DailyStatusModel.Role" />
+          <AssociationSet Name="FK_RoleActivity_Role" Association="DailyStatusModel.FK_RoleActivity_Role">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="RoleActivity" EntitySet="RoleActivities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Role" Association="DailyStatusModel.FK_User_Role">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <FunctionImport Name="GetAllRoles" ReturnType="Collection(DailyStatusModel.GetAllRoles_Result)">
+            <Parameter Name="StartRecord" Mode="In" Type="Int32" />
+            <Parameter Name="PageSize" Mode="In" Type="Int32" />
+            <Parameter Name="SortColumn" Mode="In" Type="String" />
+            <Parameter Name="SortOrder" Mode="In" Type="String" />
+            <Parameter Name="SearchText" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="RoleActivities" Relationship="DailyStatusModel.FK_RoleActivity_Role" FromRole="Role" ToRole="RoleActivity" />
+          <NavigationProperty Name="Users" Relationship="DailyStatusModel.FK_User_Role" FromRole="Role" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_RoleActivity_Role">
+          <End Type="DailyStatusModel.Role" Role="Role" Multiplicity="1" />
+          <End Type="DailyStatusModel.RoleActivity" Role="RoleActivity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RoleActivity">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Role">
+          <End Type="DailyStatusModel.Role" Role="Role" Multiplicity="1" />
+          <End Type="DailyStatusModel.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="UserRoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="GetAllRoles_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="ModifiedBy" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="ModifiedDate" Nullable="false" Precision="23" />
+          <Property Type="Boolean" Name="IsActive" Nullable="false" />
+          <Property Type="Int32" Name="TotalRows" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -489,19 +510,6 @@
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="OtherStatus" ColumnName="OtherStatus" />
                 <ScalarProperty Name="Comments" ColumnName="Comments" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Roles">
-            <EntityTypeMapping TypeName="DailyStatusModel.Role">
-              <MappingFragment StoreEntitySet="Role">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -569,6 +577,31 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="DailyStatusModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetAllRoles" FunctionName="DailyStatusModel.Store.GetAllRoles">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DailyStatusModel.GetAllRoles_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="TotalRows" ColumnName="TotalRows" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

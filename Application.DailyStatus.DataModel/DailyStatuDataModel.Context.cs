@@ -12,6 +12,8 @@ namespace Application.DailyStatus.DataAccessEntities
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class DatabaseConnection : DbContext
     {
@@ -28,11 +30,36 @@ namespace Application.DailyStatus.DataAccessEntities
         public virtual DbSet<Activity> Activities { get; set; }
         public virtual DbSet<AuditDetail> AuditDetails { get; set; }
         public virtual DbSet<DailyWorkStatu> DailyWorkStatus { get; set; }
-        public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<RoleActivity> RoleActivities { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<TimeZone> TimeZones { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<UserDateWiseStatu> UserDateWiseStatus { get; set; }
+        public virtual DbSet<Role> Roles { get; set; }
+    
+        public virtual ObjectResult<GetAllRoles_Result> GetAllRoles(Nullable<int> startRecord, Nullable<int> pageSize, string sortColumn, string sortOrder, string searchText)
+        {
+            var startRecordParameter = startRecord.HasValue ?
+                new ObjectParameter("StartRecord", startRecord) :
+                new ObjectParameter("StartRecord", typeof(int));
+    
+            var pageSizeParameter = pageSize.HasValue ?
+                new ObjectParameter("PageSize", pageSize) :
+                new ObjectParameter("PageSize", typeof(int));
+    
+            var sortColumnParameter = sortColumn != null ?
+                new ObjectParameter("SortColumn", sortColumn) :
+                new ObjectParameter("SortColumn", typeof(string));
+    
+            var sortOrderParameter = sortOrder != null ?
+                new ObjectParameter("SortOrder", sortOrder) :
+                new ObjectParameter("SortOrder", typeof(string));
+    
+            var searchTextParameter = searchText != null ?
+                new ObjectParameter("SearchText", searchText) :
+                new ObjectParameter("SearchText", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAllRoles_Result>("GetAllRoles", startRecordParameter, pageSizeParameter, sortColumnParameter, sortOrderParameter, searchTextParameter);
+        }
     }
 }

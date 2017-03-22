@@ -72,7 +72,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DailyStatuDataModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="DailyStatusRepository.cs" />
     <Compile Include="DailyWorkStatu.cs">
+      <DependentUpon>DailyStatuDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetAllRoles_Result.cs">
       <DependentUpon>DailyStatuDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

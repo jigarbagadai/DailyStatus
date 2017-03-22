@@ -5,6 +5,6 @@
     [IsActive] BIT NOT NULL DEFAULT 1, 
     [CreatedBy] NVARCHAR(50) NOT NULL, 
     [CreatedDate] DATETIME NOT NULL DEFAULT GETUTCDATE(), 
-    [ModifiedBy] INT NOT NULL, 
+    [ModifiedBy] NVARCHAR(50) NOT NULL, 
     [ModifiedDate] DATETIME NOT NULL DEFAULT GETUTCDATE()
 )

@@ -34,9 +34,9 @@ namespace Application.DailyStatus.DataAccessEntities
         public int UserRoleId { get; set; }
         public int TimeZoneId { get; set; }
     
-        public virtual Role Role { get; set; }
         public virtual TimeZone TimeZone { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserDateWiseStatu> UserDateWiseStatus { get; set; }
+        public virtual Role Role { get; set; }
     }
 }

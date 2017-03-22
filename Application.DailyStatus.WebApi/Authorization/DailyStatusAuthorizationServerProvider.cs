@@ -1,35 +1,34 @@
-﻿using Microsoft.Owin.Security.OAuth;
+﻿using Application.DailyStatus.BusinessCommon;
+using Application.DailyStatus.BusinessInterface;
+using Microsoft.Owin.Security.OAuth;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
+using Microsoft.Practices.Unity;
+using Application.DailyStatus.BusinessEntities;
 
 namespace Application.DailyStatus.WebApi
 {
-    public class DailyStatusAuthorizationServerProvider: OAuthAuthorizationServerProvider
+    public class DailyStatusAuthorizationServerProvider : OAuthAuthorizationServerProvider
     {
         public override async Task ValidateClientAuthentication(OAuthValidateClientAuthenticationContext context)
         {
-             context.Validated();
+            context.Validated();
         }
 
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
             var identity = new ClaimsIdentity(context.Options.AuthenticationType);
-            if (context.UserName == "admin" && context.Password == "admin")
+            IUserServices userService = UnityContainerHelper.GetUnityContainerInstance().Resolve<IUserServices>();
+            UserEntity userEntity = userService.AuthenticateUser(context.UserName, context.Password);
+            if (userEntity != null)
             {
                 identity.AddClaim(new Claim(ClaimTypes.Role, "admin"));
-                identity.AddClaim(new Claim("username", "admin"));
-                identity.AddClaim(new Claim(ClaimTypes.Name, "Sourav Mondal"));
-                context.Validated(identity);
-            }
-            else if (context.UserName == "user" && context.Password == "user")
-            {
-                identity.AddClaim(new Claim(ClaimTypes.Role, "user"));
-                identity.AddClaim(new Claim("username", "user"));
-                identity.AddClaim(new Claim(ClaimTypes.Name, "Suresh Sha"));
+                identity.AddClaim(new Claim("username", userEntity.LoginId));
+                identity.AddClaim(new Claim(ClaimTypes.Name, userEntity.UserName));
                 context.Validated(identity);
             }
             else

@@ -11,6 +11,10 @@ namespace Application.DailyStatus.DataAccessInterface
     {
         GenericRepository<User> UserRepository { get; }
 
+        GenericRepository<Role> RoleRepository { get; }
+
+        DailyStatusRepository DailyStatusRepository { get; }
+
         void Save();
     }
 }

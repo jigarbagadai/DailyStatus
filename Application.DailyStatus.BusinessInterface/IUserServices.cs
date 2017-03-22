@@ -10,5 +10,7 @@ namespace Application.DailyStatus.BusinessInterface
     public  interface IUserServices
     {
         UserEntity GetUserById(int userId);
+
+        UserEntity AuthenticateUser(string userName, string password);
     }
 }

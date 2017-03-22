@@ -16,6 +16,7 @@ namespace Application.DailyStatus.BusinessCommon
         public void SetUp(IRegisterComponent registerComponent)
         {
             registerComponent.RegisterType<IUserServices, UserServices>();
+            registerComponent.RegisterType<IRoleServices, RoleServices>();
             registerComponent.RegisterType<DataAccessInterface.IUnitOfWork, DataAccess.UnitOfWork>();
         }
     }

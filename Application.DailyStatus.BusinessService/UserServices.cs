@@ -31,5 +31,18 @@ namespace Application.DailyStatus.BusinessService
 
             return null;
         }
+
+        public UserEntity AuthenticateUser(string userName, string password)
+        {
+            User user = this.unitOfWork.UserRepository.Get(m => m.LoginId == userName && m.Password == password);
+            if (user != null)
+            {
+                UserEntity userEntity = new UserEntity();
+                userEntity = Mapper.Map<User, UserEntity>(user);
+                return userEntity;
+            }
+
+            return null;
+        }
     }
 }

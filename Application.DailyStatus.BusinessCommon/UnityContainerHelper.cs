@@ -13,9 +13,21 @@ namespace Application.DailyStatus.BusinessCommon
 {
     public static class UnityContainerHelper
     {
+        private static UnityContainer unityContainer = null;
+
+        public static UnityContainer GetUnityContainerInstance()
+        {
+            if(unityContainer == null)
+            {
+                unityContainer = new UnityContainer();
+            }
+
+            return unityContainer;
+        }
+
         public static IUnityContainer BuildUnityContainer()
         {
-            var container = new UnityContainer();
+            var container = GetUnityContainerInstance();
             RegisterTypes(container);
             return container;
         }
