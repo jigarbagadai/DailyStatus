@@ -10,5 +10,6 @@ namespace Application.DailyStatus.WebApi.Controllers
 {
     public class BaseController : ApiController
     {
+        public const int PAGESIZE = 10;
     }
 }

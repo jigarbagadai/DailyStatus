@@ -9,7 +9,7 @@ namespace Application.DailyStatus.WebApi
 {
     public static class Entensions
     {
-        public static DailyStatusActionResult ToApiResult(this BaseEntity baseEntity)
+        public static DailyStatusActionResult ToApiResult(this object baseEntity)
         {
             if (baseEntity != null)
             {
@@ -22,5 +22,14 @@ namespace Application.DailyStatus.WebApi
                 return new DailyStatusActionResult(errorMessage, ResponseStatus.NotFound);
             }
         }
+
+        public static OKResult ToOKResult(this bool result)
+        {
+            OKResult okResult = new OKResult();
+            okResult.ResultCode = result ? "OK" : "ERROR";
+            return okResult;
+        }
     }
+
+
 }

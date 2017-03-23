@@ -189,6 +189,7 @@
           <Parameter Name="SortColumn" Type="nvarchar" Mode="In" />
           <Parameter Name="SortOrder" Type="nvarchar" Mode="In" />
           <Parameter Name="SearchText" Type="nvarchar" Mode="In" />
+          <Parameter Name="Status" Type="bit" Mode="In" />
         </Function>
         <EntityContainer Name="DailyStatusModelStoreContainer">
           <EntitySet Name="Activity" EntityType="Self.Activity" Schema="dbo" store:Type="Tables" />
@@ -421,6 +422,7 @@
             <Parameter Name="SortColumn" Mode="In" Type="String" />
             <Parameter Name="SortOrder" Mode="In" Type="String" />
             <Parameter Name="SearchText" Mode="In" Type="String" />
+            <Parameter Name="Status" Mode="In" Type="Boolean" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="Role">

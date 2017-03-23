@@ -15,11 +15,11 @@ namespace Application.DailyStatus.DataAccessEntities
             this.Context = context;
         }
 
-        public List<GetAllRoles_Result> GetAllRoles(int startRecord, int pageSize, string sortColumn,string sortDirection,string searchText)
+        public virtual List<GetAllRoles_Result> GetAllRoles(int startRecord, int pageSize, string sortColumn, string sortDirection, string searchText, bool status)
         {
             List<GetAllRoles_Result> roles = new List<GetAllRoles_Result>();
-            roles = Context.GetAllRoles(startRecord, pageSize, sortColumn, sortDirection, searchText).ToList();
-            return roles;    
+            roles = Context.GetAllRoles(startRecord, pageSize, sortColumn, sortDirection, searchText, status).ToList();
+            return roles;
         }
     }
 }

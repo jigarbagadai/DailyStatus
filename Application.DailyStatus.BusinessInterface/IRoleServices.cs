@@ -11,11 +11,11 @@ namespace Application.DailyStatus.BusinessInterface
     {
         List<RoleListEntity> GetAllRole(string roleName, bool status, int skipRecords, int pageSize, string sortDirection, string sortColumn);
 
-        void DeleteRole(int roleId);
+        bool DeleteRole(int roleId);
 
         RoleEntity GetRoleById(int roleId);
 
-        bool SaveRole(RoleEntity role);
+        bool SaveRole(RoleEntity role, string modifiedBy);
 
         bool IsRoleNameExists(int roleId, string roleName);
     }

@@ -37,7 +37,7 @@ namespace Application.DailyStatus.DataAccessEntities
         public virtual DbSet<UserDateWiseStatu> UserDateWiseStatus { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
     
-        public virtual ObjectResult<GetAllRoles_Result> GetAllRoles(Nullable<int> startRecord, Nullable<int> pageSize, string sortColumn, string sortOrder, string searchText)
+        public virtual ObjectResult<GetAllRoles_Result> GetAllRoles(Nullable<int> startRecord, Nullable<int> pageSize, string sortColumn, string sortOrder, string searchText, Nullable<bool> status)
         {
             var startRecordParameter = startRecord.HasValue ?
                 new ObjectParameter("StartRecord", startRecord) :
@@ -59,7 +59,11 @@ namespace Application.DailyStatus.DataAccessEntities
                 new ObjectParameter("SearchText", searchText) :
                 new ObjectParameter("SearchText", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAllRoles_Result>("GetAllRoles", startRecordParameter, pageSizeParameter, sortColumnParameter, sortOrderParameter, searchTextParameter);
+            var statusParameter = status.HasValue ?
+                new ObjectParameter("Status", status) :
+                new ObjectParameter("Status", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAllRoles_Result>("GetAllRoles", startRecordParameter, pageSizeParameter, sortColumnParameter, sortOrderParameter, searchTextParameter, statusParameter);
         }
     }
 }
