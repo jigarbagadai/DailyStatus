@@ -14,11 +14,11 @@ AS
 		WHERE ISNULL(@SearchText,'ALL')='ALL' OR Name Like '%'+@SearchText+'%' AND IsActive=@Status
 	) AS T
 	ORDER BY 
-		CASE WHEN @SortColumn='NAME' AND @SortOrder='ASC' THEN Name	END ASC,
+		CASE WHEN @SortColumn='RoleName' AND @SortOrder='ASC' THEN Name	END ASC,
 		CASE WHEN @SortColumn='ModifiedBy' AND @SortOrder='ASC' THEN ModifiedBy END ASC,
 		CASE WHEN @SortColumn='ModifiedDate' AND @SortOrder='ASC' THEN ModifiedDate	END ASC,
 		CASE WHEN @SortColumn='IsActive' AND @SortOrder='ASC' THEN IsActive END ASC,
-		CASE WHEN @SortColumn='NAME' AND @SortOrder='DESC' THEN Name END DESC,	
+		CASE WHEN @SortColumn='RoleName' AND @SortOrder='DESC' THEN Name END DESC,	
 		CASE WHEN @SortColumn='ModifiedBy' AND @SortOrder='DESC' THEN ModifiedBy END DESC,
 		CASE WHEN @SortColumn='ModifiedDate' AND @SortOrder='DESC' THEN ModifiedDate END DESC,	 
 		CASE WHEN @SortColumn='IsActive' AND @SortOrder='DESC' THEN IsActive END DESC

@@ -42,11 +42,23 @@ namespace Application.DailyStatus.WebApi.Controllers
         }
 
         [DailyStatusAuthorize(Roles = "admin")]
-        [Route("Roles/{roleName}/{status:bool}/{skipRecords:int}/{sortDirection}/{sortColumn}")]
-        public DailyStatusActionResult GetAllRole(string roleName, bool status, int skipRecords, string sortDirection, string sortColumn)
+        [Route("Roles/{roleName}/{status:bool}/{skipRecords:int}/{pageSize:int}/{sortDirection}/{sortColumn}")]
+        public DailyStatusActionResult GetAllRole(string roleName, bool status, int skipRecords, int pagesize, string sortDirection, string sortColumn)
         {
-            List<RoleListEntity> roles = this.roleService.GetAllRole(roleName, status, skipRecords, PAGESIZE, sortDirection, sortColumn);
-            return roles.ToApiResult();
+            List<RoleListEntity> roles = this.roleService.GetAllRole(roleName, status, skipRecords, pagesize, sortDirection, sortColumn);
+
+            PageDataResult pagedResult = new PageDataResult();
+            pagedResult.CurrentPageNumber = ((skipRecords / pagesize) + 1);
+            pagedResult.SortDirection = sortDirection;
+            pagedResult.SortKey = sortColumn;
+
+            if (roles != null && roles.Any())
+            {
+                pagedResult.TotalRecords = roles.FirstOrDefault().TotalRows;
+                pagedResult.Data = roles;
+            }
+
+            return pagedResult.ToApiResult();
         }
 
         [DailyStatusAuthorize(Roles = "admin")]
@@ -60,7 +72,7 @@ namespace Application.DailyStatus.WebApi.Controllers
             return result.ToApiResult();
         }
 
-        [DailyStatusAuthorize(Roles="admin")]
+        [DailyStatusAuthorize(Roles = "admin")]
         [Route("Roles/Save")]
         [HttpPost]
         public DailyStatusActionResult SaveRole(RoleEntity role)

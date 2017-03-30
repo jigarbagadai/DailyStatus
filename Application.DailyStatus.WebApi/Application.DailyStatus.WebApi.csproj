@@ -192,6 +192,7 @@
     <Compile Include="Common\DailyStatusActionResult.cs" />
     <Compile Include="Common\Entensions.cs" />
     <Compile Include="Common\OKResult.cs" />
+    <Compile Include="Common\PageDataResult.cs" />
     <Compile Include="Common\ResponseStatus.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
